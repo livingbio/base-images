@@ -4,7 +4,7 @@ MAINTAINER gliacloud <robot@gliacloud.com>
 RUN apt-get update
 RUN apt-get install -y python-pip python-dev libpq-dev curl git unzip
 ADD requirements.txt /tmp/requirement.txt
-RUN pip install -y /tmp/requirement.txt
+RUN pip install -r /tmp/requirement.txt
 
 # default running endpoint
 RUN curl https://raw.githubusercontent.com/gliacloud/deploy/new/src/run.sh -o /usr/bin/run.sh
