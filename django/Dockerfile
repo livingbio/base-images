@@ -1,4 +1,4 @@
-FROM gliacloud:django
+FROM ubuntu:14.04
 MAINTAINER gliacloud <robot@gliacloud.com>
 
 RUN apt-get update
