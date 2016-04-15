@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 MAINTAINER gliacloud <robot@gliacloud.com>
 
 RUN apt-get update
-RUN apt-get install -y  python-pip python-dev python-lxml libpq-dev curl git unzip
+RUN apt-get install -y  python-pip python-dev libxml2-dev libxslt1-dev python-lxml libpq-dev curl git unzip
 
 ADD requirements.txt /tmp/requirement.txt
 RUN pip install -r /tmp/requirement.txt
