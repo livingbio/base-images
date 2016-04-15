@@ -104,3 +104,6 @@ uwsgi
 # https://pypi.python.org/pypi/lxml/3.4.0
 lxml==3.4.0
 
+# Python 2 and 3 compatibility utilities
+# https://pypi.python.org/pypi/six
+six==1.10.0
