@@ -100,3 +100,7 @@ raven==5.8.1
 uwsgi
 
 
+# Powerful and Pythonic XML processing library combining libxml2/libxslt with the ElementTree API.
+# https://pypi.python.org/pypi/lxml/3.4.0
+lxml==3.4.0
+
