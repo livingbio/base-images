@@ -107,3 +107,11 @@ lxml==3.4.0
 # Python 2 and 3 compatibility utilities
 # https://pypi.python.org/pypi/six
 six==1.10.0
+
+
+# Pillow - Python Imaging Library fork
+# https://github.com/python-pillow/Pillow
+Pillow
+
+
+flake8
