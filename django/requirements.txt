@@ -142,3 +142,11 @@ flake8==2.5.4
 # https://pypi.python.org/pypi/autocov/2016.4.29.15
 autocov==2016.4.29.15
 
+
+# pdb++, a drop-in replacement for pdb
+# https://pypi.python.org/pypi/pdbpp
+pdbpp==0.8.3
+
+
+# Rolling backport of unittest.mock for all Pythons
+# https://pypi.python.org/pypi/mock
