@@ -1,6 +1,6 @@
 from nvidia/cuda:7.5-devel
 add . /src
-
+run apt-key add /src/nvidia.pgp.key
 # install caffe
 RUN apt-get update && apt-get install -y \
   git \
