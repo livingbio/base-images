@@ -74,5 +74,3 @@ nltk
 # Redis client for Python
 # https://redis-py.readthedocs.org/en/latest/
 redis==2.10.5
-
--e git+git@github.com:livingbio/syntaxnet_wrapper.git#egg=syntaxnet_wrapper
