@@ -41,11 +41,10 @@ RUN ln -s /dev/null /dev/raw1394
 env LC_CTYPE zh_TW.UTF-8
 env LC_MESSAGES zh_TW.UTF-8
 env LC_TIME zh_TW.UTF-8
-run python -m nltk.downloader punkt
 
 # install bazel
 run apt-get update
-run apt-get install software-properties-common debconf-utils unzip -y 
+run apt-get install swig software-properties-common debconf-utils unzip -y 
 run add-apt-repository ppa:webupd8team/java -y
 run apt-get update
 run echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
@@ -67,11 +66,9 @@ run pip install -r /src/requirements.txt
 
 run pip install -r /src/requirements.txt
 run locale-gen zh_TW zh_TW.UTF-8 zh_CN.UTF-8 en_US.UTF-8
-run apt-get update && apt-get install -y python-opencv swig
+run apt-get update && apt-get install -y python-opencv
+run python -m nltk.downloader punkt
 
 run pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.10.0rc0-cp27-none-linux_x86_64.whl
-workdir /src/zhconvert
-run python setup.py install
-workdir /src/imgsent
-run python setup.py install
+
 
