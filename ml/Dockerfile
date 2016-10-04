@@ -49,7 +49,7 @@ run add-apt-repository ppa:webupd8team/java -y
 run apt-get update
 run echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections
 run apt-get install -y oracle-java8-installer
-from ml
+
 run wget https://github.com/bazelbuild/bazel/releases/download/0.3.1/bazel-0.3.1-installer-linux-x86_64.sh
 run chmod +x bazel-0.3.1-installer-linux-x86_64.sh
 run ./bazel-0.3.1-installer-linux-x86_64.sh --user
