@@ -1,2 +1,0 @@
-startup --batch
-build --spawn_strategy=standalone --genrule_strategy=standalone

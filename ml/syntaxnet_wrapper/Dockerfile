@@ -23,5 +23,5 @@ run pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/te
 
 workdir /root
 run git clone https://github.com/livingbio/syntaxnet_wrapper
-run cd syntaxnet_wrapper && python setup.py
+run cd syntaxnet_wrapper && python setup.py install
 run cd syntaxnet_wrapper/syntaxnet_wrapper && make
