@@ -22,6 +22,8 @@ RUN mkdir -p $SYNTAXNETDIR \
 RUN cd $SYNTAXNETDIR/models/syntaxnet \
     && bazel test --genrule_strategy=standalone syntaxnet/... util/utf8/...
 
+ENV PYTHONPATH_SYNTAXNET=/opt/tensorflow/models/syntaxnet/bazel-bin/syntaxnet/parser_eval.runfiles/__main__
+
 WORKDIR $SYNTAXNETDIR/models/syntaxnet
 
 CMD [ "sh", "-c", "echo 'Bob brought the pizza to Alice.' | syntaxnet/demo.sh" ]
