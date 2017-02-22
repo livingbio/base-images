@@ -1,5 +1,6 @@
 from gliacloud/base_images:caffe
 
+
 # install bazel
 run apt-get update
 run apt-get install swig software-properties-common debconf-utils unzip -y 
