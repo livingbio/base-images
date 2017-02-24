@@ -1,5 +1,6 @@
 
 node {
+   checkout scm
    stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
 	  sh 'ls'
