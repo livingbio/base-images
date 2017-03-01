@@ -2,8 +2,11 @@
 node('small') {
    checkout scm
    stage('Preparation') { // for display purposes
-      sh 'cd django'
+      dir 'django'
       sh 'docker build . -t django'
+      sh 'pwd'
+      dir ''
+      sh 'pwd'
    }
 //   sshagent (credentials: ['d4890042-20b5-42a9-a61e-4aea75e4badf']) {
 //       stage('Build'){
