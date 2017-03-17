@@ -16,8 +16,8 @@ RUN curl https://raw.githubusercontent.com/gliacloud/deploy/new/src/run.sh -o /u
 RUN chmod +x /usr/bin/run.sh
 RUN mkdir /logs
 
-RUN locale-gen en_US.UTF-8  
-ENV LANG en_US.UTF-8  
-ENV LANGUAGE en_US:en  
-ENV LC_ALL en_US.UTF-8  
+RUN locale-gen zh_TW.UTF-8  
+ENV LANG zh_TW.UTF-8  
+ENV LANGUAGE zh_TW:en  
+ENV LC_ALL zh_TW.UTF-8  
 
