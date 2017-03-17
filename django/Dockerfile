@@ -15,3 +15,9 @@ RUN locale-gen zh_TW.UTF-8
 RUN curl https://raw.githubusercontent.com/gliacloud/deploy/new/src/run.sh -o /usr/bin/run.sh
 RUN chmod +x /usr/bin/run.sh
 RUN mkdir /logs
+
+RUN locale-gen en_US.UTF-8  
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8  
+
