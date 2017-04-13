@@ -1,10 +1,39 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER gliacloud <robot@gliacloud.com>
 
 
 RUN apt-get update
-RUN apt-get install -y python-pip python-dev libxml2-dev libxslt1-dev python-lxml libpq-dev curl git unzip
-RUN apt-get install -y libjpeg-dev libpng-dev libffi-dev
+RUN apt-get install -y libssl-dev \
+                       openssl \
+                       imagemagick \
+                       ffmpeg \
+                       libfreeimage-dev \
+                       libjpeg-dev \
+                       libpng-dev \
+                       libffi-dev \
+                       libblas-dev \
+                       liblapack-dev \
+                       libatlas-base-dev \
+                       gfortran \
+                       python-pip \
+                       wget \
+                       libevent-dev \
+                       python-pip \
+                       python-dev \
+                       libxml2-dev \
+                       libxslt1-dev \
+                       python-lxml \
+                       libpq-dev \
+                       curl \
+                       git \
+                       unzip \
+                       python-numpy \
+                       python-sklearn \
+                       python-skimage \
+                       python-gevent \
+                       python-libsass
+
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD requirements.txt /tmp/requirement.txt
 RUN pip install -r /tmp/requirement.txt
