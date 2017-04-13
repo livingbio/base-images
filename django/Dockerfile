@@ -35,6 +35,7 @@ RUN apt-get install -y libssl-dev \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN pip install -U pip
 ADD requirements.txt /tmp/requirement.txt
 RUN pip install -r /tmp/requirement.txt
 
