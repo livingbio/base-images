@@ -3,8 +3,7 @@ MAINTAINER gliacloud <robot@gliacloud.com>
 
 
 RUN apt-get update && \
-    apt-get install -y locale \
-                       libssl-dev \
+    apt-get install -y libssl-dev \
                        openssl \
                        imagemagick \
                        ffmpeg \
