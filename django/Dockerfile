@@ -2,14 +2,9 @@ FROM ubuntu:16.04
 MAINTAINER gliacloud <robot@gliacloud.com>
 
 
-RUN locale-gen zh_TW.UTF-8  
-ENV LANG zh_TW.UTF-8  
-ENV LANGUAGE zh_TW:en  
-ENV LC_ALL zh_TW.UTF-8  
-
-
 RUN apt-get update && \
-    apt-get install -y libssl-dev \
+    apt-get install -y locale \
+                       libssl-dev \
                        openssl \
                        imagemagick \
                        ffmpeg \
@@ -24,7 +19,6 @@ RUN apt-get update && \
                        python-pip \
                        wget \
                        libevent-dev \
-                       python-pip \
                        python-dev \
                        libxml2-dev \
                        libxslt1-dev \
@@ -39,6 +33,13 @@ RUN apt-get update && \
                        python-gevent \
                        python-libsass && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+
+
+RUN locale-gen zh_TW.UTF-8  
+ENV LANG zh_TW.UTF-8  
+ENV LANGUAGE zh_TW:en  
+ENV LC_ALL zh_TW.UTF-8  
 
 RUN pip install -U pip
 ADD requirements.txt /tmp/requirement.txt
