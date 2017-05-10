@@ -97,7 +97,6 @@ eatiht==0.1.14
 # https://pypi.python.org/pypi/jsonfield/1.0.3
 jsonfield==1.0.3
 
--r video-composer.txt
 
 
 # request cache
@@ -123,7 +122,6 @@ filechunkio==1.8
 # http://docs.celeryproject.org/en/latest/index.html#
 celery[redis]==3.1.23
 
--r etweather.txt
 
 MarkupSafe==0.23
 
@@ -255,7 +253,6 @@ gensim==0.13.1
 # https://pypi.python.org/pypi/suds
 suds==0.4
 
--r base.txt
 # A configurable set of panels that display various debug information about the current request/response.
 # https://pypi.python.org/pypi/django-debug-toolbar/1.4
 django-debug-toolbar==1.5
