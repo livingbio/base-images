@@ -31,7 +31,7 @@ RUN apt-get update && \
                        python-sklearn \
                        python-skimage \
                        python-gevent \
-                       python-libsass && \
+                       python-libsass \
                        software-properties-common && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
