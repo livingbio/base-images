@@ -32,6 +32,7 @@ RUN apt-get update && \
                        python-skimage \
                        python-gevent \
                        python-libsass && \
+                       software-properties-common && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
@@ -42,5 +43,6 @@ ENV LANGUAGE zh_TW:en
 ENV LC_ALL zh_TW.UTF-8  
 
 RUN pip install -U pip
+run rm /etc/ImageMagick-6/policy.xml
 ADD requirements.txt /tmp/requirement.txt
 RUN pip install -r /tmp/requirement.txt
