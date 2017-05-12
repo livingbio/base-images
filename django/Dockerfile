@@ -32,7 +32,8 @@ RUN apt-get update && \
                        python-skimage \
                        python-gevent \
                        python-libsass \
-                       software-properties-common && \
+                       software-properties-common \
+                       python-mysqldb && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
