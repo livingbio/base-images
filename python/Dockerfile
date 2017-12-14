@@ -1,4 +1,4 @@
-FROM tomcat
+FROM asia.gcr.io/living-bio/base_images:tomcat
 
 ENV PY2VER 2.7.13
 ENV PY3VER 3.6.2
