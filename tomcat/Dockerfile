@@ -1,10 +1,11 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 MAINTAINER Carlos Moro <cmoro@deusto.es>
 
-ENV TOMCAT_VERSION 8.0.47
+ENV TOMCAT_VERSION 8.0.53
 
 # Set locales
+RUN apt-get clean && apt-get update && apt-get install -y locales
 RUN locale-gen en_GB.UTF-8
 ENV LANG en_GB.UTF-8
 ENV LC_CTYPE en_GB.UTF-8
