@@ -5,6 +5,7 @@ RUN locale-gen zh_TW.UTF-8
 ENV LANG zh_TW.UTF-8
 ENV LANGUAGE zh_TW:en
 ENV LC_ALL zh_TW.UTF-8
+ENV PATH="/usr/local/lib/python3.6.7/bin/:${PATH}"
 
 ENV PIP_EXTRA_INDEX_URL https://gliacloud:cookiebank@pypi-dot-living-bio.appspot.com/pypi
 RUN pip install flashtext nltk pyknp spacy==2.0.5 zhconvert Pillow genv && \
