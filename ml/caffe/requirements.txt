@@ -1,6 +1,6 @@
 # Django
 # https://www.djangoproject.com/
-Django==1.9.9
+Django
 
 # pytz - World Timezone Definitions for Python
 # http://pytz.sourceforge.net/
