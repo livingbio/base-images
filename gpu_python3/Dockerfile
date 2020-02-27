@@ -1,5 +1,5 @@
 # docker build -f Dockerfile -t asia.gcr.io/living-bio/base_images:gpu_caffe_python3_7_1 .
-FROM nvidia/cuda:9.0-cudnn7-devel
+FROM nvidia/cuda:10.1-devel-ubuntu18.04
 
 ENV PY3VER 3.7.1
 ENV PY3VER_MAJ 3.7
@@ -31,10 +31,10 @@ RUN wget -q https://www.python.org/ftp/python/${PY3VER}/Python-${PY3VER}.tgz && 
 
 ENV PATH /usr/local/lib/python${PY3VER}/bin/:${PATH}
 
-RUN wget http://sourceforge.net/projects/boost/files/boost/1.69.0/boost_1_69_0.tar.gz && \
-    tar xvfz boost_1_69_0.tar.gz && \
-    rm -f boost_1_69_0.tar.gz && \
-    cd boost_1_69_0 && \
+RUN wget https://storage.googleapis.com/gliacloud-package/img2vec_service/boost_1_72_0.tar.gz && \
+    tar xvfz boost_1_72_0.tar.gz && \
+    rm -f boost_1_72_0.tar.gz && \
+    cd boost_1_72_0 && \
     export CPLUS_INCLUDE_PATH=/usr/local/lib/python${PY3VER}/include/python${PY3VER_MAJ}m && \
     ./bootstrap.sh --with-python=/usr/local/bin/python --with-python-root=/usr/local/lib/python${PY3VER} && \
     ./b2 stage threading=multi link=shared && \
@@ -50,17 +50,18 @@ RUN apt -y install libprotobuf-dev libleveldb-dev libsnappy-dev libhdf5-serial-d
     pip install scikit-image opencv-python protobuf && \
     git clone https://github.com/BVLC/caffe && \
     mkdir -p caffe/build && \
-    wget https://storage.googleapis.com/gliacloud-package/img2vec_service/cmake-3.13.2.tgz && \
-    tar xvfz cmake-3.13.2.tgz
+    wget https://storage.googleapis.com/gliacloud-package/img2vec_service/cmake-3.16.4-Linux-x86_64.tar.gz && \
+    tar xvfz cmake-3.16.4-Linux-x86_64.tar.gz && \
+    rm -f cmake-3.16.4-Linux-x86_64.tar.gz
 
-ENV PATH /root/cmake-3.13.2-Linux-x86_64/bin:$PATH
+ENV PATH /root/cmake-3.16.4-Linux-x86_64/bin:$PATH
 
 WORKDIR /root/caffe/build
 
 RUN cmake -DPYTHON_EXECUTABLE=/usr/local/lib/python${PY3VER}/bin/python3 \
         -DPYTHON_INCLUDE_DIR=/usr/local/lib/python${PY3VER}/include/python${PY3VER_MAJ}m \
         -DPYTHON_LIBRARY=/usr/local/lib/python${PY3VER}/lib/libpython${PY3VER_MAJ}m.so \
-        -DUSE_CUDNN=0 -DUSE_NCCL=1 .. && \
+        -DUSE_CUDNN=0 -DUSE_NCCL=1 -DCUDA_ARCH_NAME="Manual" -DCUDA_ARCH_BIN="60 61 70 75" .. && \
     make -j8 all && \
     make install && \
     cp install/lib/* /usr/local/lib/ && \
