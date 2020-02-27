@@ -1,4 +1,4 @@
-# docker build -f Dockerfile -t asia.gcr.io/living-bio/base_images:gpu_caffe_python3_7_1 .
+# docker build -f Dockerfile -t asia.gcr.io/living-bio/base_images:gpu_caffe_python3_7_1_cuda10_1 .
 FROM nvidia/cuda:10.1-devel-ubuntu18.04
 
 ENV PY3VER 3.7.1
