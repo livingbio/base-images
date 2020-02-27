@@ -61,7 +61,7 @@ WORKDIR /root/caffe/build
 RUN cmake -DPYTHON_EXECUTABLE=/usr/local/lib/python${PY3VER}/bin/python3 \
         -DPYTHON_INCLUDE_DIR=/usr/local/lib/python${PY3VER}/include/python${PY3VER_MAJ}m \
         -DPYTHON_LIBRARY=/usr/local/lib/python${PY3VER}/lib/libpython${PY3VER_MAJ}m.so \
-        -DUSE_CUDNN=0 -DUSE_NCCL=1 -DCUDA_ARCH_NAME="Manual" -DCUDA_ARCH_BIN="60 61 70 75" .. && \
+        -DUSE_CUDNN=0 -DUSE_NCCL=1 -DCUDA_ARCH_NAME="Manual" -DCUDA_ARCH_BIN="30 35 50 52 60 61 70 75" .. && \
     make -j8 all && \
     make install && \
     cp install/lib/* /usr/local/lib/ && \
