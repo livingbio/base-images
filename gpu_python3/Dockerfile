@@ -46,9 +46,10 @@ RUN wget https://storage.googleapis.com/gliacloud-package/img2vec_service/boost_
 
 RUN apt -y install libprotobuf-dev libleveldb-dev libsnappy-dev libhdf5-serial-dev protobuf-compiler \
     libatlas-base-dev doxygen cmake libgflags-dev libgoogle-glog-dev liblmdb-dev libopencv-dev && \
-    git clone https://github.com/NVIDIA/nccl.git && cd nccl && make -j install && cd .. && rm -rf nccl && \
-    pip install scikit-image opencv-python protobuf && \
-    git clone https://github.com/BVLC/caffe && \
+    pip install scikit-image opencv-python protobuf
+
+RUN git clone https://github.com/NVIDIA/nccl.git && cd nccl && make -j install && cd .. && rm -rf nccl && \
+    git clone https://github.com/livingbio/caffe && \
     mkdir -p caffe/build && \
     wget https://storage.googleapis.com/gliacloud-package/img2vec_service/cmake-3.16.4-Linux-x86_64.tar.gz && \
     tar xvfz cmake-3.16.4-Linux-x86_64.tar.gz && \
