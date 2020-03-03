@@ -45,5 +45,11 @@ RUN git clone https://github.com/pytorch/vision.git && \
     cd .. && \
     rm -rf /opt/vision
 
+RUN git clone https://github.com/NVIDIA/apex.git && \
+    cd apex && \
+    pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" . && \
+    cd .. && \
+    rm -rf /opt/apex
+
 WORKDIR /workspace
 RUN chmod -R a+w /workspace
