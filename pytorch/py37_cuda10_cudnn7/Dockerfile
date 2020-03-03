@@ -1,3 +1,4 @@
+# https://github.com/pytorch/pytorch/blob/master/docker/pytorch/Dockerfile
 # docker build -f Dockerfile -t asia.gcr.io/living-bio/base_images:pytorch_py37_cuda10_cudnn7 .
 FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 ARG PYTHON_VERSION=3.7
