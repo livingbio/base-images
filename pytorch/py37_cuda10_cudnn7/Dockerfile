@@ -37,17 +37,13 @@ RUN TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0 7.5+PTX" TORCH_NVCC_FLAGS="-Xfatbin -compr
     cd .. && \
     rm -rf /opt/pytorch
 
+RUN apt install -y libavcodec-dev libavformat-dev libavutil-dev libswresample-dev libswscale-dev
+
 RUN git clone https://github.com/pytorch/vision.git && \
     cd vision && \
     pip install -v . && \
     cd .. && \
     rm -rf /opt/vision
-
-RUN git clone https://github.com/nvidia/apex && \
-    cd apex && \
-    python setup.py install --cuda_ext --cpp_ext && \
-    cd .. && \
-    rm -rf /opt/apex
 
 WORKDIR /workspace
 RUN chmod -R a+w /workspace
