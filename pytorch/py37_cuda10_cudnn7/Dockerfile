@@ -28,7 +28,7 @@ ENV PATH /opt/conda/bin:$PATH
 # This must be done before pip so that requirements.txt is available
 WORKDIR /opt
 
-RUN TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0 7.5+PTX" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
+RUN TORCH_CUDA_ARCH_LIST="Pascal Volta Turing" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
     CMAKE_PREFIX_PATH="$(dirname $(which conda))/../" \
     git clone https://github.com/pytorch/pytorch && \
     cd pytorch && \
