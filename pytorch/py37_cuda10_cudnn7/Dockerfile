@@ -45,7 +45,7 @@ RUN export TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0 7.5 6.0+PTX 6.1+PTX 7.0+PTX 7.5+PTX
     git submodule update --init --recursive && \
     pip install -v . && \
     cd .. && \
-    rm -rf /opt/pytorch
+    rm -rf /opt/pytorch /opt/ccache/*
 
 RUN apt install -y libavcodec-dev libavformat-dev libavutil-dev libswresample-dev libswscale-dev
 
@@ -53,13 +53,13 @@ RUN git clone https://github.com/pytorch/vision.git && \
     cd vision && \
     pip install -v . && \
     cd .. && \
-    rm -rf /opt/vision
+    rm -rf /opt/vision /opt/ccache/*
 
 RUN git clone https://github.com/NVIDIA/apex.git && \
     cd apex && \
     pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" . && \
     cd .. && \
-    rm -rf /opt/apex
+    rm -rf /opt/apex /opt/ccache/*
 
 WORKDIR /workspace
 RUN chmod -R a+w /workspace
