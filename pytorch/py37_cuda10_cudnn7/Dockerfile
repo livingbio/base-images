@@ -33,7 +33,7 @@ RUN curl https://storage.googleapis.com/gliacloud-package/img2vec_service/cmake-
 
 ENV PATH /opt/cmake-3.16.4-Linux-x86_64/bin:$PATH
 
-RUN export TORCH_CUDA_ARCH_LIST="Pascal Volta Turing" \
+RUN export TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0 7.5 6.0+PTX 6.1+PTX 7.0+PTX 7.5+PTX" \
         TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
         CMAKE_PREFIX_PATH="$(dirname $(which conda))/../" && \
     git clone https://github.com/pytorch/pytorch && \
