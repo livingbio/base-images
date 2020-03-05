@@ -6,6 +6,7 @@ RUN apt update && apt install -y --no-install-recommends \
          software-properties-common \
          build-essential \
          cmake \
+         ccache \
          git \
          curl \
          vim \
@@ -13,6 +14,9 @@ RUN apt update && apt install -y --no-install-recommends \
          libjpeg-dev \
          libpng-dev &&\
      rm -rf /var/lib/apt/lists/*
+
+RUN /usr/sbin/update-ccache-symlinks
+RUN mkdir /opt/ccache && ccache --set-config=cache_dir=/opt/ccache
 
 RUN add-apt-repository -y ppa:jonathonf/ffmpeg-4 && \
     apt update && apt install -y ffmpeg
