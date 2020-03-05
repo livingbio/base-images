@@ -21,15 +21,21 @@ RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-la
      chmod +x ~/miniconda.sh && \
      ~/miniconda.sh -b -p /opt/conda && \
      rm ~/miniconda.sh && \
-     /opt/conda/bin/conda install -y python=$PYTHON_VERSION numpy pyyaml scipy ipython mkl mkl-include ninja cython typing && \
-     /opt/conda/bin/conda install -y -c pytorch magma-cuda100 && \
+     /opt/conda/bin/conda install -y python=$PYTHON_VERSION numpy pyyaml scipy ipython mkl mkl-include ninja cython && \
      /opt/conda/bin/conda clean -ya
 ENV PATH /opt/conda/bin:$PATH
 # This must be done before pip so that requirements.txt is available
 WORKDIR /opt
 
-RUN TORCH_CUDA_ARCH_LIST="Pascal Volta Turing" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
-    CMAKE_PREFIX_PATH="$(dirname $(which conda))/../" \
+RUN curl https://storage.googleapis.com/gliacloud-package/img2vec_service/cmake-3.16.4-Linux-x86_64.tar.gz --output cmake.tar.gz && \
+    tar xfz cmake.tar.gz && \
+    rm -f cmake.tar.gz
+
+ENV PATH /opt/cmake-3.16.4-Linux-x86_64/bin:$PATH
+
+RUN export TORCH_CUDA_ARCH_LIST="Pascal Volta Turing" \
+        TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
+        CMAKE_PREFIX_PATH="$(dirname $(which conda))/../" && \
     git clone https://github.com/pytorch/pytorch && \
     cd pytorch && \
     git submodule update --init --recursive && \
