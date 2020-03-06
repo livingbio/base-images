@@ -1,4 +1,3 @@
-# https://github.com/pytorch/pytorch/blob/master/docker/pytorch/Dockerfile
 # https://github.com/pytorch/pytorch/blob/master/Dockerfile
 # docker build -f Dockerfile -t asia.gcr.io/living-bio/base_images:pytorch_py37_cuda10_cudnn7 .
 FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
@@ -27,6 +26,7 @@ RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-la
      ~/miniconda.sh -b -p /opt/conda && \
      rm ~/miniconda.sh && \
      /opt/conda/bin/conda install -y python=$PYTHON_VERSION numpy pyyaml scipy ipython mkl mkl-include ninja cython && \
+     /opt/conda/bin/conda install -y pip setuptools && \
      /opt/conda/bin/conda clean -ya
 ENV PATH /opt/conda/bin:$PATH
 # This must be done before pip so that requirements.txt is available
