@@ -21,12 +21,13 @@ RUN mkdir /opt/ccache && ccache --set-config=cache_dir=/opt/ccache
 RUN add-apt-repository -y ppa:jonathonf/ffmpeg-4 && \
     apt update && apt install -y ffmpeg
 
-RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh  && \
+RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
      chmod +x ~/miniconda.sh && \
      ~/miniconda.sh -b -p /opt/conda && \
      rm ~/miniconda.sh && \
-     /opt/conda/bin/conda install -y python=$PYTHON_VERSION numpy pyyaml scipy ipython mkl mkl-include ninja cython && \
      /opt/conda/bin/conda install -y pip setuptools && \
+     /opt/conda/bin/conda install -y python=$PYTHON_VERSION numpy pyyaml scipy ipython mkl mkl-include ninja cython && \
+     /opt/conda/bin/conda install -y -c pytorch magma-cuda101 && \
      /opt/conda/bin/conda clean -ya
 ENV PATH /opt/conda/bin:$PATH
 # This must be done before pip so that requirements.txt is available
@@ -38,12 +39,13 @@ RUN curl https://storage.googleapis.com/gliacloud-package/img2vec_service/cmake-
 
 ENV PATH /opt/cmake-3.16.4-Linux-x86_64/bin:$PATH
 
-RUN export TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0 7.5 6.0+PTX 6.1+PTX 7.0+PTX 7.5+PTX" \
-        TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
-        CMAKE_PREFIX_PATH="$(dirname $(which conda))/../" && \
-    git clone https://github.com/pytorch/pytorch && \
+RUN git clone https://github.com/pytorch/pytorch && \
     cd pytorch && \
     git submodule update --init --recursive && \
+    TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0 7.5 6.0+PTX 6.1+PTX 7.0+PTX 7.5+PTX" \
+    TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
+    CMAKE_PREFIX_PATH="$(dirname $(which conda))/../" \
+    BUILD_TEST=0 \
     pip install -v . && \
     cd .. && \
     rm -rf /opt/pytorch /opt/ccache/*
