@@ -13,7 +13,7 @@ FROM asia.gcr.io/living-bio/base_images:python3_7_1_zh_ja_en
 # - pip install flashtext nltk spacy==2.0.5 Pillow
 
 RUN apt update && apt install -y automake && \
-    curl -LO https://bitbucket.org/eunjeon/mecab-ko/downloads/mecab-0.996-ko-0.9.2.tar.gz && \
+    curl -L https://bitbucket.org/eunjeon/mecab-ko/downloads/mecab-0.996-ko-0.9.2.tar.gz && \
     tar zxfv mecab-0.996-ko-0.9.2.tar.gz && \
     cd mecab-0.996-ko-0.9.2 && \
     ./configure && \
@@ -22,7 +22,7 @@ RUN apt update && apt install -y automake && \
     make install && \
     cd .. && \
     ldconfig && \
-    curl -LO https://bitbucket.org/eunjeon/mecab-ko-dic/downloads/mecab-ko-dic-2.1.1-20180720.tar.gz && \
+    curl -L https://bitbucket.org/eunjeon/mecab-ko-dic/downloads/mecab-ko-dic-2.1.1-20180720.tar.gz && \
     tar zxfv mecab-ko-dic-2.1.1-20180720.tar.gz && \
     cd mecab-ko-dic-2.1.1-20180720 && \
     ./autogen.sh && \
