@@ -1,7 +1,7 @@
 # https://github.com/pytorch/pytorch/blob/master/Dockerfile
 # docker build -f Dockerfile -t asia.gcr.io/living-bio/base_images:pytorch_py37_cuda10_1_cudnn7 .
 FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
-ARG PYTHON_VERSION=3.7
+ARG PYTHON_VERSION=3.7.7
 RUN apt update && apt install -y --no-install-recommends \
          software-properties-common \
          build-essential \
@@ -21,7 +21,7 @@ RUN mkdir /opt/ccache && ccache --set-config=cache_dir=/opt/ccache
 RUN add-apt-repository -y ppa:jonathonf/ffmpeg-4 && \
     apt update && apt install -y ffmpeg
 
-RUN curl -o ~/miniconda.sh -L https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+RUN curl -o ~/miniconda.sh -L https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.3-Linux-x86_64.sh && \
      chmod +x ~/miniconda.sh && \
      ~/miniconda.sh -b -p /opt/conda && \
      rm ~/miniconda.sh && \
