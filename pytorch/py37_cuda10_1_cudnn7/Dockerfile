@@ -1,7 +1,10 @@
 # https://github.com/pytorch/pytorch/blob/master/Dockerfile
 # docker build -f Dockerfile -t asia.gcr.io/living-bio/base_images:pytorch_py37_cuda10_1_cudnn7 .
 FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
-ARG PYTHON_VERSION=3.7.7
+ENV PYTHON_VERSION=3.7.7 \
+    PYTORCH_VERSION=1.6.0 \
+    VISION_VERSION=0.7.0
+
 RUN apt update && apt install -y --no-install-recommends \
          software-properties-common \
          build-essential \
@@ -39,7 +42,7 @@ RUN curl https://storage.googleapis.com/gliacloud-package/img2vec_service/cmake-
 
 ENV PATH /opt/cmake-3.16.4-Linux-x86_64/bin:$PATH
 
-RUN git clone https://github.com/pytorch/pytorch && \
+RUN git clone --branch v${PYTORCH_VERSION} --depth 1 https://github.com/pytorch/pytorch && \
     cd pytorch && \
     git submodule update --init --recursive && \
     TORCH_CUDA_ARCH_LIST="6.0 6.1 7.0 7.5 6.0+PTX 6.1+PTX 7.0+PTX 7.5+PTX" \
@@ -52,13 +55,13 @@ RUN git clone https://github.com/pytorch/pytorch && \
 
 RUN apt install -y libavcodec-dev libavformat-dev libavutil-dev libswresample-dev libswscale-dev
 
-RUN git clone https://github.com/pytorch/vision.git && \
+RUN git clone --branch v${VISION_VERSION} --depth 1 https://github.com/pytorch/vision && \
     cd vision && \
     pip install -v . && \
     cd .. && \
     rm -rf /opt/vision /opt/ccache/*
 
-RUN git clone https://github.com/NVIDIA/apex.git && \
+RUN git clone https://github.com/NVIDIA/apex && \
     cd apex && \
     pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" . && \
     cd .. && \
