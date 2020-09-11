@@ -40,7 +40,7 @@ ENV PATH /opt/conda/bin:$PATH
 # This must be done before pip so that requirements.txt is available
 WORKDIR /opt
 
-RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz -O cmake.tar.gz && \
+RUN wget -q https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz -O cmake.tar.gz && \
     tar xfz cmake.tar.gz && \
     rm -f cmake.tar.gz
 
