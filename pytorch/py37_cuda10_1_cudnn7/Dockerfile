@@ -2,7 +2,8 @@
 # docker build -f Dockerfile -t asia.gcr.io/living-bio/base_images:pytorch_py37_cuda10_1_cudnn7 .
 FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 ENV CMAKE_VERSION=3.18.2 \
-    PYTHON_VERSION=3.7.7 \
+    MINICONDA3_VERSION=py37_4.8.3 \
+    PYTHON_VERSION=3.7 \
     PYTORCH_VERSION=1.6.0 \
     VISION_VERSION=0.7.0
 
@@ -27,13 +28,13 @@ RUN add-apt-repository -y ppa:jonathonf/ffmpeg-4 && \
     apt update && \
     apt install -y ffmpeg
 
-RUN curl -o ~/miniconda.sh -L https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.3-Linux-x86_64.sh && \
+RUN curl -o ~/miniconda.sh -L https://repo.anaconda.com/miniconda/Miniconda3-${MINICONDA3_VERSION}-Linux-x86_64.sh && \
     chmod +x ~/miniconda.sh && \
     ~/miniconda.sh -b -p /opt/conda && \
     rm ~/miniconda.sh && \
     /opt/conda/bin/conda install -y python=${PYTHON_VERSION} && \
     /opt/conda/bin/conda install -y pip "setuptools<50" wheel && \
-    /opt/conda/bin/conda install -y numpy pyyaml scipy ipython mkl mkl-include ninja cython && \
+    /opt/conda/bin/conda install -y numpy pyyaml scipy ipython mkl mkl-include ninja cython pillow && \
     /opt/conda/bin/conda install -y -c pytorch magma-cuda101 && \
     /opt/conda/bin/conda clean -ya
 ENV PATH /opt/conda/bin:$PATH
@@ -53,7 +54,9 @@ RUN git clone --branch v${PYTORCH_VERSION} --depth 1 https://github.com/pytorch/
     TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
     CMAKE_PREFIX_PATH="$(dirname $(which conda))/../" \
     BUILD_TEST=0 \
-    pip install -v . && \
+    PYTORCH_BUILD_VERSION=${PYTORCH_VERSION} \
+    PYTORCH_BUILD_NUMBER=1 \
+    python setup.py install && \
     cd .. && \
     rm -rf /opt/pytorch /opt/ccache/*
 
@@ -61,13 +64,14 @@ RUN apt install -y libavcodec-dev libavformat-dev libavutil-dev libswresample-de
 
 RUN git clone --branch v${VISION_VERSION} --depth 1 https://github.com/pytorch/vision && \
     cd vision && \
-    pip install -v . && \
+    BUILD_VERSION=${VISION_VERSION} \
+    python setup.py install && \
     cd .. && \
     rm -rf /opt/vision /opt/ccache/*
 
 RUN git clone https://github.com/NVIDIA/apex && \
     cd apex && \
-    pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" . && \
+    python setup.py install --cpp_ext --cuda_ext && \
     cd .. && \
     rm -rf /opt/apex /opt/ccache/*
 
